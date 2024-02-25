@@ -11,6 +11,7 @@ builder.Services.AddSwaggerGen();
 
 // App +
 builder.Services.AddPayToPhone();
+builder.Services.AddPayToPhoneIntegratorAsMock();
 // -----
 
 var app = builder.Build();
