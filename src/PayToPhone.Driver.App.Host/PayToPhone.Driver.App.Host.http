@@ -1,0 +1,6 @@
+@PayToPhone.Driver.App.Host_HostAddress = http://localhost:5148
+
+GET {{PayToPhone.Driver.App.Host_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

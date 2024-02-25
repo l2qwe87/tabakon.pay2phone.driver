@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayToPhone.Driver.App.Contracts", "PayToPhone.Driver.App.Contracts\PayToPhone.Driver.App.Contracts.csproj", "{A7731903-804F-4045-8AE1-7073CAB9C0D1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayToPhone.Driver.App.AppServices", "PayToPhone.Driver.App.AppServices\PayToPhone.Driver.App.AppServices.csproj", "{9C8B8943-83D8-407E-9E0B-FF0BEE8CE256}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayToPhone.Driver.App.Host", "PayToPhone.Driver.App.Host\PayToPhone.Driver.App.Host.csproj", "{6D4F705C-AC46-4A23-B089-D057158B4717}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7731903-804F-4045-8AE1-7073CAB9C0D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7731903-804F-4045-8AE1-7073CAB9C0D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7731903-804F-4045-8AE1-7073CAB9C0D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7731903-804F-4045-8AE1-7073CAB9C0D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C8B8943-83D8-407E-9E0B-FF0BEE8CE256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C8B8943-83D8-407E-9E0B-FF0BEE8CE256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C8B8943-83D8-407E-9E0B-FF0BEE8CE256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C8B8943-83D8-407E-9E0B-FF0BEE8CE256}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D4F705C-AC46-4A23-B089-D057158B4717}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D4F705C-AC46-4A23-B089-D057158B4717}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D4F705C-AC46-4A23-B089-D057158B4717}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D4F705C-AC46-4A23-B089-D057158B4717}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2B9ACE29-731C-4FF0-95E7-CACB44C8FEF9}
+	EndGlobalSection
+EndGlobal
