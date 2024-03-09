@@ -1,36 +1,31 @@
 using Microsoft.AspNetCore.Mvc;
-using PayToPhone.Driver.App.Contracts;
+using PayToPhone.Driver.App.Contracts.Listener;
 
 namespace PayToPhone.Driver.App.Host.Controllers;
 
 [ApiController]
 [Route("PayToPhoneListener")]
 public class PayToPhoneListenerController : ControllerBase {
-    private readonly IPayToPhoneListener _payToPhoneListener;
-    private readonly ILogger<PayToPhoneListenerController> _logger;
+    private readonly ITabakonWebSocketServer _tabakonWebSocketServer;
 
     public PayToPhoneListenerController(
-        IPayToPhoneListener payToPhoneListener,
-        ILogger<PayToPhoneListenerController> logger
+        ITabakonWebSocketServer tabakonWebSocketServer
         ) {
-        _payToPhoneListener = payToPhoneListener;
-        _logger = logger;
+        _tabakonWebSocketServer = tabakonWebSocketServer;
     }
 
     [HttpGet("GetlistenerStatus")]
-    public Task<bool> GetlistenerStatus() {
-        return _payToPhoneListener.GetlistenerStatus();
+    public bool GetlistenerStatus() {
+        return _tabakonWebSocketServer.GetlistenerStatus();
     }
 
     [HttpGet("Startlistener")]
-    public Task Startlistener() {
-        return _payToPhoneListener.Startlistener();
+    public void Startlistener([FromQuery] string host="*", int port= 5511) {
+        _tabakonWebSocketServer.Startlistener($"http://{host}:{port}/");
     }
 
     [HttpGet("Stoplistener")]
-    public Task Stoplistener() {
-        return _payToPhoneListener.Stoplistener();
+    public void Stoplistener() {
+        _tabakonWebSocketServer.Stoplistener();
     }
-
-    
 }

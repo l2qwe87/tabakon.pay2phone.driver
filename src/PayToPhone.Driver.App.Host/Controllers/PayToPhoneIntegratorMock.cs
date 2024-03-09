@@ -7,13 +7,20 @@ namespace PayToPhone.Driver.App.Host.Controllers {
     [Route("PayToPhoneIntegratorMock")]
     public class PayToPhoneIntegratorMockController : ControllerBase {
 
-        private readonly ILogger<IPayToPhoneIntegrator> payToPhoneIntegrator;
+        private readonly IPayToPhoneIntegrator _payToPhoneIntegrator;
         private readonly ILogger<PayToPhoneListenerController> _logger;
 
         public PayToPhoneIntegratorMockController(
-                ILogger<PayToPhoneListenerController> logger
+                ILogger<PayToPhoneListenerController> logger,
+                IPayToPhoneIntegrator payToPhoneIntegrator
             ) {
             _logger = logger;
+            _payToPhoneIntegrator = payToPhoneIntegrator;
         }
+
+        //[HttpPost("PayToPhone")]
+        //public Task<PayToPhoneIntegratorResponse> PayToPhone(PayToPhoneIntegratorRequest request, CancellationToken cancellationToken) {
+        //    return _payToPhoneIntegrator.PayToPhone(request, cancellationToken);
+        //}
     }
 }
