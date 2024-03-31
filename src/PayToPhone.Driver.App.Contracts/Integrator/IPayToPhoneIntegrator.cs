@@ -1,8 +1,6 @@
 ﻿using PayToPhone.Driver.App.Contracts.Integrator.Commands;
-using PayToPhone.Driver.App.Contracts.Integrator.Events;
 using PayToPhone.Driver.App.Contracts.Integrator.Requests;
 using PayToPhone.Driver.App.Contracts.Integrator.Responses;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
