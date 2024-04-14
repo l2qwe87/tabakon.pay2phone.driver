@@ -10,24 +10,28 @@ using PayToPhone.Driver.App.Contracts.Integrator.Requests;
 using PayToPhone.Driver.App.Contracts.Integrator.Responses;
 using PayToPhone.Driver.App.Contracts.Listener;
 using System;
+using System.Threading;
 
 namespace PayToPhone.Driver.App.AppServices.Integrator
 {
-    internal class PayToPhoneIntegratorProxy : IPayToPhoneIntegrator {
+    internal class PayToPhoneIntegratorWebSocketProxy : IPayToPhoneIntegrator {
 
         private readonly IPayToPhoneRepository _payToPhoneRepository;
         private readonly ITabakonWebSocketServer _tabakonWebSocketServer;
+        private readonly IOrderStatusHandler _orderStatusHandler;
         private readonly ILogger _logger;
 
         private string _latestOrderId = null;
 
-        public PayToPhoneIntegratorProxy(
+        public PayToPhoneIntegratorWebSocketProxy(
             IPayToPhoneRepository payToPhoneRepository,
             ITabakonWebSocketServer tabakonWebSocketServer,
-            ILogger<PayToPhoneIntegratorProxy> logger
+            IOrderStatusHandler orderStatusHandler,
+            ILogger<PayToPhoneIntegratorWebSocketProxy> logger
             ) {
             _payToPhoneRepository = payToPhoneRepository;
             _tabakonWebSocketServer = tabakonWebSocketServer;
+            _orderStatusHandler = orderStatusHandler;
             _logger = logger;
 
             _tabakonWebSocketServer.OnMessegeReceived += orderStatusChanged;
@@ -49,8 +53,8 @@ namespace PayToPhone.Driver.App.AppServices.Integrator
             await _payToPhoneRepository.CreateRefundOrder(command, cancellationToken);
         }
 
-        public Task<GetOrderStatusResponse> GetOrderStatus(GetOrderStatusRequest getOrderStatusRequest, CancellationToken cancellationToken){
-            return _payToPhoneRepository.GetOrderStatus(getOrderStatusRequest, cancellationToken);
+        public Task<GetOrderStatusResponse> GetOrderStatus(GetOrderStatusRequest request, CancellationToken cancellationToken){
+            return _payToPhoneRepository.GetOrderStatus(request, cancellationToken);
         }
 
         private async Task SendCleaner<T>(CancellationToken cancellationToken) {
@@ -75,20 +79,7 @@ namespace PayToPhone.Driver.App.AppServices.Integrator
         }
 
         private void orderStatusChanged(object sender, IWebSocketMessege webSocketMessege) {
-            if(webSocketMessege.MessageType == nameof(OrderStatusChanged)) {
-                _logger.LogInformation($"orderStatusChanged: {webSocketMessege}");
-                var paymentOrderStatusChanged = webSocketMessege.MessageBody.ToObject<OrderStatusChanged>();
-
-                //OnPaymentOrderStatusChanged?.Invoke(this, paymentOrderStatusChanged);
-                lock (_payToPhoneRepository) {
-                    _payToPhoneRepository
-                        .UpdateOrderStatus(_latestOrderId, paymentOrderStatusChanged.OrderStatus, paymentOrderStatusChanged.Description, CancellationToken.None)
-                        .Wait();
-                }
-
-            } else {
-                _logger.LogError($"Bed event: {webSocketMessege}");
-            }
+            _orderStatusHandler.OrderStatusChanged(webSocketMessege, CancellationToken.None).Wait();
         }
     }
 }

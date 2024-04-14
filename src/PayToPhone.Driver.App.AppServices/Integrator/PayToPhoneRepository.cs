@@ -5,6 +5,7 @@ using PayToPhone.Driver.App.Contracts.Integrator.Requests;
 using PayToPhone.Driver.App.Contracts.Integrator.Responses;
 
 namespace PayToPhone.Driver.App.AppServices.Integrator {
+
     internal class PayToPhoneRepository : IPayToPhoneRepository {
 
         private InMemoryRepository<string, OrderEntity> orders = new();

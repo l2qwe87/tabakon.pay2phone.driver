@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using System.Net;
 
 internal class Program {
     private static async Task Main(string[] args) {
@@ -35,14 +36,17 @@ internal class Program {
         // App +
         builder.Services.AddAppServices();
         // -----
+        builder.WebHost.ConfigureKestrel((context, serverOptions) => {
+            serverOptions.Listen(IPAddress.Any, 5148);
+        });
 
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
-        if (app.Environment.IsDevelopment()) {
+        //if (app.Environment.IsDevelopment()) {
             app.UseSwagger();
             app.UseSwaggerUI();
-        }
+        //}
 
         app.UseHttpsRedirection();
         app.UseAuthorization();

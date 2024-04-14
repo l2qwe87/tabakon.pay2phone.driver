@@ -4,8 +4,7 @@ using System.Threading;
 using PayToPhone.Driver.App.Contracts.Integrator.Requests;
 using PayToPhone.Driver.App.Contracts.Integrator.Responses;
 
-namespace PayToPhone.Driver.App.Contracts.Integrator.Repository
-{
+namespace PayToPhone.Driver.App.Contracts.Integrator.Repository {
     public interface IPayToPhoneRepository
     {
         Task CreatePaymentOrder(CreatePaymentOrderCommand paymentOrder, CancellationToken cancellationToken);

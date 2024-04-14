@@ -9,7 +9,10 @@ namespace PayToPhone.Driver.App.AppServices.Infrastructure {
     public static class AppServicesRegistration {
         public static IServiceCollection AddPayToPhone(this IServiceCollection services) {
             services.AddSingleton<ITabakonWebSocketServer, TabakonWebSocketServer>();
-            services.AddSingleton<IPayToPhoneIntegrator, PayToPhoneIntegratorProxy>();
+            //services.AddSingleton<IPayToPhoneIntegrator, PayToPhoneIntegratorWebSocketProxy>();
+            services.AddSingleton<IMessageQueue, MessageQueue>();
+            services.AddSingleton<IOrderStatusHandler, OrderStatusHandler>();
+            services.AddSingleton<IPayToPhoneIntegrator, PayToPhoneIntegratorQueue>();
             services.AddSingleton<IPayToPhoneRepository, PayToPhoneRepository>();
 
             return services;
