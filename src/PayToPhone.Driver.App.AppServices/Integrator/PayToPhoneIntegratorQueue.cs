@@ -12,8 +12,8 @@ namespace PayToPhone.Driver.App.AppServices.Integrator {
         private readonly IPayToPhoneRepository _payToPhoneRepository;
         private IMessageQueue _messageQueue;
 
-        private static RefundCommand refundClearCommand = new RefundCommand { Amount = 111, PaymentMethod = Contracts.PaymentMethod.NFC, OrderId = "1111111" };
-        private static CreatePaymentOrderCommand createPaymentOrderCleanCommand = new CreatePaymentOrderCommand { Amount = 111, PaymentMethod = Contracts.PaymentMethod.NFC, OrderId = "1111111" };
+        //private static RefundCommand refundClearCommand = new RefundCommand { Amount = 111, PaymentMethod = Contracts.PaymentMethod.NFC, OrderId = "1111111" };
+        //private static CreatePaymentOrderCommand createPaymentOrderCleanCommand = new CreatePaymentOrderCommand { Amount = 111, PaymentMethod = Contracts.PaymentMethod.NFC, OrderId = "1111111" };
 
         public PayToPhoneIntegratorQueue(
             ILogger<PayToPhoneIntegratorWebSocketProxy> logger,
@@ -25,7 +25,7 @@ namespace PayToPhone.Driver.App.AppServices.Integrator {
         }
 
         public async Task CreatePaymentOrder(CreatePaymentOrderCommand command, CancellationToken cancellationToken) {
-            _messageQueue.Enqueue(refundClearCommand);
+            //_messageQueue.Enqueue(refundClearCommand);
             _messageQueue.Enqueue(command);
             _logger.LogInformation($"{typeof(CreatePaymentOrderCommand).Name}: {command}");
             await _payToPhoneRepository.CreatePaymentOrder(command, cancellationToken);
@@ -36,7 +36,7 @@ namespace PayToPhone.Driver.App.AppServices.Integrator {
         }
 
         public async Task Refund(RefundCommand command, CancellationToken cancellationToken) {
-            _messageQueue.Enqueue(createPaymentOrderCleanCommand);
+            //_messageQueue.Enqueue(createPaymentOrderCleanCommand);
             _messageQueue.Enqueue(command);
             _logger.LogInformation($"{typeof(RefundCommand).Name}: {command}");
             await _payToPhoneRepository.CreateRefundOrder(command, cancellationToken);

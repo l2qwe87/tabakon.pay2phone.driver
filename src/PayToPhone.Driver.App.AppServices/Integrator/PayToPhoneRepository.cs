@@ -28,6 +28,8 @@ namespace PayToPhone.Driver.App.AppServices.Integrator {
                 OrderId = command.OrderId,
                 PaymentMethod = command.PaymentMethod,
                 Amount = command.Amount,
+                TransactionId = command.TransactionId,
+                Mid = command.Mid,
                 OrderStatus = OrderStatus.New
             };
 
@@ -78,6 +80,10 @@ namespace PayToPhone.Driver.App.AppServices.Integrator {
             public OrderStatus OrderStatus { get; set; }
 
             public string Description { get; set; }
+            
+            public long TransactionId { get; set; }
+            
+            public long Mid { get; set; }
         }
     }
 }
